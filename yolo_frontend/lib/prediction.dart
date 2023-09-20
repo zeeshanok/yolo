@@ -2,6 +2,9 @@ import 'dart:ui';
 
 class Prediction {
   final String name;
+
+  // top left and bottom right corners of the bounding box of the
+  // predicted object
   final Offset p1, p2;
 
   Prediction({

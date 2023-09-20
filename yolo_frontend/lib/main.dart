@@ -36,12 +36,16 @@ class _CameraPageState extends State<CameraPage> {
   late CameraController controller;
 
   late WebSocketChannel _channel;
-  StreamController<dynamic> _streamController = StreamController.broadcast();
+
+  final StreamController<dynamic> _streamController =
+      StreamController.broadcast();
 
   bool isReady = false, isPaused = false;
 
+  // list of predictions the server made
   List<Prediction> _predictions = [];
 
+  // image resolution
   Size _resolution = Size.zero;
 
   @override
@@ -88,7 +92,6 @@ class _CameraPageState extends State<CameraPage> {
   Future<void> predictCameraImage() async {
     if (isPaused) return;
     try {
-      // await controller.pausePreview();
       final pic = await controller.takePicture();
 
       final predictions = await sendPic(
@@ -100,7 +103,6 @@ class _CameraPageState extends State<CameraPage> {
         _resolution = predictions.$1;
         _predictions = predictions.$2;
       });
-      // await controller.resumePreview();
     } catch (e) {
       debugPrint(e.toString());
     }

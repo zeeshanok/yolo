@@ -8,6 +8,9 @@ import 'package:yolo_frontend/prediction.dart';
 
 Future<(Size resolution, List<Prediction> predictions)> sendPic(XFile img,
     WebSocketChannel channel, Stream<dynamic> websocketStream) async {
+  // When the camera package takes a picture on windows (not on web)
+  // it is a mirror image of the camera preview. To work around this
+  // I mirror it back on the server. Just a temporary fix.
   channel.sink.add('${kIsWeb ? '' : 'r'}sending');
 
   await websocketStream.firstWhere((data) => data == 'ready');
