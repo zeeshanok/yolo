@@ -1,8 +1,12 @@
 # yolo
-An image classifier app made with flutter and a python backend
+An image classifier app made with flutter and a python backend.
+
+Works on:
+✅ Windows
+✅ Web
 
 ## Running
-The server must be running before opening the app
+The server must be running before opening the app.
 
 ### To run the server:
 The packages that are needed to work are listed in `requirements.txt`. Run the following:
