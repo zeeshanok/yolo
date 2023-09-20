@@ -1,14 +1,14 @@
 from ultralytics import YOLO
-from torch import Tensor
-from PIL import Image, ImageDraw
+from PIL import Image, ImageOps
 import io
 
 model = YOLO("yolov8n.pt")
 
-
-def get_bounding_boxes(b: bytes) -> list[dict[str, list[int, int, int, int] | str]]:
+def get_bounding_boxes(b: bytes, img_reversed: bool) -> list[dict[str, list[int, int, int, int] | str]]:
     print("processing")
     img = Image.open(io.BytesIO(b))
+    if img_reversed:
+        img = ImageOps.mirror(img)
     results = model(img, verbose=False)
 
     return {
